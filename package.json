@@ -1,0 +1,19 @@
+{
+  "name": "vip-bot-gpt-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "chatgpt": "^5.2.5",
+    "dotenv": "^16.3.1",
+    "es-koa-body": "^4.2.7",
+    "koa": "^2.14.2"
+  }
+}
