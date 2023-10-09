@@ -9,6 +9,8 @@ const app = new Koa();
 const port = process.env.PORT || 3010;
 
 const accessToken = process.env.ACCESS_TOKEN;
+const conversationId = process.env.CONVERSATION_ID;
+const parentMessageId = process.env.PARENT_MESSAGE_ID;
 
 app.use(bodyParser());
 
@@ -19,15 +21,16 @@ const api = new ChatGPTUnofficialProxyAPI({
 
 app.use(async (ctx) => {
   const { message } = ctx.request.body;
-
+  console.log(message);
   try {
     const response = await api.sendMessage(message, {
-      conversationId: "af42aa0f-cd6b-4ba8-814e-c824318d2ed3",
-      parentMessageId: "d001827f-f3a5-45ee-bed8-30441d1b640b",
+      conversationId: conversationId,
+      parentMessageId: parentMessageId,
     });
 
     const reply = response.text;
     ctx.body = { reply };
+    console.log(reply);
   } catch (error) {
     console.error(error);
     ctx.status = 500;
