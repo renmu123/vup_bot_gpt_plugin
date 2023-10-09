@@ -9,7 +9,6 @@ const app = new Koa();
 const port = process.env.PORT || 3010;
 
 const accessToken = process.env.ACCESS_TOKEN;
-console.log("ppp", accessToken);
 
 app.use(bodyParser());
 
@@ -19,7 +18,6 @@ const api = new ChatGPTUnofficialProxyAPI({
 });
 
 app.use(async (ctx) => {
-  console.log(ctx.request.body);
   const { message } = ctx.request.body;
 
   try {
