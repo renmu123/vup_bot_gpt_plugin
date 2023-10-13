@@ -9,8 +9,8 @@ const app = new Koa();
 const port = process.env.PORT || 3010;
 
 const accessToken = process.env.ACCESS_TOKEN;
-const conversationId = process.env.CONVERSATION_ID;
-const parentMessageId = process.env.PARENT_MESSAGE_ID;
+
+const DATA = JSON.parse(process.env.DATA);
 
 app.use(bodyParser());
 
@@ -20,8 +20,24 @@ const api = new ChatGPTUnofficialProxyAPI({
 });
 
 app.use(async (ctx) => {
-  const { message } = ctx.request.body;
+  const { message, mode } = ctx.request.body;
   console.log(message);
+  if (DATA.length === 0) {
+    ctx.status = 500;
+    ctx.body = { reply: "请先进行配置" };
+    return;
+  }
+  const item = DATA.filter((item) => item.name === mode)[0];
+
+  let conversationId = "";
+  let parentMessageId = "";
+  if (item === undefined) {
+    conversationId = DATA[0].conversation_id;
+    parentMessageId = DATA[0].parnt_message_id;
+  } else {
+    conversationId = item.conversation_id;
+    parentMessageId = item.parnt_message_id;
+  }
   try {
     const response = await api.sendMessage(message, {
       conversationId: conversationId,
