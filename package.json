@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.5.1",
     "chatgpt": "^5.2.5",
     "dotenv": "^16.3.1",
-    "es-koa-body": "^4.2.7",
-    "koa": "^2.14.2"
+    "koa": "^2.14.2",
+    "koa-body": "^6.0.1",
+    "koa-router": "^11.0.2"
   }
 }
